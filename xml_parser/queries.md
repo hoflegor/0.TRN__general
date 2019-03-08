@@ -1,13 +1,13 @@
 
 * ##### CREATE DATABASE...
 ````
- CREATE DATABASE netg CHARACTER SET utf8 COLLATE utf8_general_ci;`
+ CREATE DATABASE xml_parser CHARACTER SET utf8 COLLATE utf8_general_ci
  ````
 
 * ##### CREATE TABLE...
 
 ````
-CREATE TABLE netg.products (
+CREATE TABLE xml_parser.products (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `prod_name` VARCHAR(255),
   `prod_id` INT,

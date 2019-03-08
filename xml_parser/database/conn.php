@@ -11,7 +11,7 @@ try {
 
 } catch (PDOException $error) {
 
-    echo $error->getMessage();
-    exit('Nie można połączyć z bazą' . $config['database']);
+    echo '<h1>Nie można połączyć z bazą <u>' . $config ['database'] . '</u></h1>';
+    exit ( "<h2>" . $error->getMessage() . "</h2>");
 
 }

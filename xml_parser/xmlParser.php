@@ -4,15 +4,18 @@ require_once('./imagesParser.php');
 require_once('./database/conn.php');
 
 
-$products = simplexml_load_file("./src/products_1927a13ce63d227pl (1).xml") or die("Error: Nie można utworzyć objektu");
+$products = simplexml_load_file("./src/products_1927a13ce63d227pl.xml")
+or die("Error: Nie można utworzyć objektu");
 
-$products = $products->xpath('item');
+//$products = $products->xpath('item');
 
 echo "<pre>";
 
 $inserted = 0;
+$exist = 0;
+$errors= 0;
 
-foreach ($products as $product) {
+foreach ($products->item as $product) {
 
 
     $data = [];
@@ -27,16 +30,16 @@ foreach ($products as $product) {
         if ($key == 'prod_img') {
 
 
-            $images = $val->xpath('img');
+            $images = $val->img;
 
             $val = "'".json_encode(($images))."'";
 
 
 //                POBIERANIE ZDJĘC NA DYSK
 
-//            foreach ( $images as $url){
-//                imagesParser($url, $path);
-//            }
+            foreach ( $images as $url){
+                imagesParser($url, $path);
+            }
 
         } else {
 
@@ -55,7 +58,7 @@ foreach ($products as $product) {
     }
 
 
-    $query = "INSERT INTO netg.products (
+    $query = 'INSERT INTO '.$config['database'].".products(
 prod_name,
 prod_id,
 prod_price,
@@ -101,15 +104,23 @@ prod_img) VALUES (";
 
     try {
         $stmt = $conn->prepare($query);
-        $stmt->execute($data);
 
-        $inserted++;
+        if ($stmt->execute($data)) {
+            $inserted++;
+        }
 
     } catch (Exception $e) {
 
+        if($e->getCode()){
+            $exist++;
+        }
+        else{
+            $errors++;
+        }
+
     }
 
-    if ($inserted==4){
+    if ($inserted == 4 || $exist == 4) {
         break;
     }
 
@@ -118,5 +129,8 @@ $conn = null;
 
 echo "<h1>PLIK SPARSOWANY<br>Podsumowanie:<hr>";
 echo "<h3>Liczba wgranych produktów: $inserted<hr></h3>";
+echo "<h3>Liczba nie wgranych produktów: $exist <br>
+        (zaktualizowano folder ze zdjęciami, nie zapisano nowego rekordu do bazy - duplikaty 'prod_symbol' )<hr></h3>";
+echo "<h3>Liczba nie wgranych produktów (inne wyjątki): $errors<hr></h3>";
 
 

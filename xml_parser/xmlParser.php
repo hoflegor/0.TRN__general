@@ -37,9 +37,9 @@ foreach ($products->item as $product) {
 
 //                POBIERANIE ZDJĘC NA DYSK
 
-            foreach ( $images as $url){
+     /*       foreach ( $images as $url){
                 imagesParser($url, $path);
-            }
+            }*/
 
         } else {
 
@@ -118,10 +118,6 @@ prod_img) VALUES (";
             $errors++;
         }
 
-    }
-
-    if ($inserted == 4 || $exist == 4) {
-        break;
     }
 
 }

@@ -1,0 +1,9 @@
+PODSUMOWANIE
+
+Ilość sprawdzonych adresów mailowych = 1545
+Ilość prawidłowych adresów mailowcych = 472
+Ilość błędnych adresów mailowcych = 1073
+
+DZIĘKUJĘ ZA ZABAWĘ Z KODEM I (MAM NADZIEJĘ), DO ZOBACZENIA W PRACY !!!!
+SERDECZNIE POZDRAWIAM !!!!
+}:->

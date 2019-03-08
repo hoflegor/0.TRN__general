@@ -21,4 +21,4 @@
 
 * #### Konfiguracja bazy danych w `database/config.php`.
 
-* #### załączam bazę danych w pliku `withoutPicture.sql`.
+* #### załączam bazę danych w pliku folderze <a href="dump"> `dump`<a>.
